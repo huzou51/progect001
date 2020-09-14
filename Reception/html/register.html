@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>注册</title>
+		<script src="../js/jquery-1.11.1/jquery.js"></script>
+	</head>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.header{
+			width: 100%;
+			height: 110px;
+			box-shadow: 0px 20px 20px -30px #5E5E5E;
+			position: relative;
+		}
+		.header_left{
+			width: 410px;
+			height: 100px;
+			position: absolute;
+			left: 400px;
+			top: 5px;
+		}
+		.header_left>img{
+			width: 100px;
+			height: 100px;
+		}
+		.header_left>span{
+			font-size: 26px;
+			color: #666;
+			position: absolute;
+			top: 40px;
+		}
+		.header_right{
+			width: 200px;
+			height: 16px;
+			font-size: 18px;
+			color: #666666;
+/* 			border: 1px solid #5E5E5E; */
+			position: absolute;
+			top: 70px;
+			left: 1400px;
+			
+		}
+		a{
+			text-decoration: none;
+		}
+		.header_right a:last-child{
+			color: red;
+		}
+		.main{
+			width: 800px;
+			height: 600px;
+			border: 1px solid #ffffff;
+			box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+			margin: 0 auto;
+			position: relative;
+			top: 50px;
+		}
+		input{
+			width: 400px;
+			height: 50px;
+			font-size: 18px;
+			border: none;
+			border: 1px solid #c2c2c2;
+			box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+		}
+		#userName{
+			position: absolute;
+			top: 100px;
+			left: 200px;
+			text-indent: 32px;
+			
+		}
+		#password{
+			position: absolute;
+			top: 200px;
+			left: 200px;
+			text-indent: 32px;
+		}
+		#box{
+		    position: relative;
+		    width: 400px;
+		    height: 50px;
+		    top: 300px;
+			left: 200px;
+		    background-color: #e8e8e8;
+		    box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+		}
+		.bgColor{
+		    position: absolute;
+		    left:0;
+		    top:0;
+		    width:50px;
+		    height: 50px;
+		    background-color: lightblue;
+		}
+		.txt{
+		    position: absolute;
+		    width: 100%;
+		    height: 50px;
+		    line-height: 50px;
+		    font-size: 18px;
+		    color: #000;
+		    text-align: center;
+		}
+		.slider{
+		    position: absolute;
+		    left:0;
+		    top:0;
+		    width: 50px;
+		    height: 50px;
+		    border: 1px solid #ccc;
+		    background: #fff;
+		    text-align: center;
+		    cursor: pointer;
+		}
+		.slider>i{
+		    position: absolute;
+		    top:50%;
+		    left:50%;
+		    transform: translate(-50%,-50%);
+		}
+		.slider.active>i{
+		    color:green;
+		}
+		form input:nth-child(4){
+			position: absolute;
+			top: 400px;
+			left: 200px;
+		}
+	</style>
+	<body>
+		<div class="header">
+			<div class="header_left">
+				<img src="../img/logo.png" >
+				<span>欢迎注册</span>
+			</div>
+			<div class="header_right">
+				<a href="login.html">已有账号？</a>
+				<a href="login.html">请登录></a>
+			</div>
+		</div>
+		<div class="main">
+			<form action="" method="post">
+				<input type="text" name="userName" id="userName" value=""  placeholder="请输入手机号"/>
+				<input type="password" name="password" id="password" value="" placeholder="请输入密码"/>
+				<div id="box" onselectstart="return false;">
+				    <div class="bgColor"></div>
+					<div class="txt" >滑动验证</div>
+				    <div class="slider">
+						<i class="iconfont icon-double-right"></i>
+					</div>
+				</div>
+				<input type="button" value="提交" id="sub"/>
+			</form>
+		</div>
+		
+		<script>
+		    //定义了一个获取元素的方法
+		    function getEle(selector){
+		        return document.querySelector(selector);
+		    }
+		    //获取到需要用到的DOM元素
+		    var box = getEle("#box"),//容器
+		        bgColor = getEle(".bgColor"),//背景色
+		        txt = getEle(".txt"),//文本
+		        slider = getEle(".slider"),//滑块
+		        icon = getEle(".slider>i"),
+		        successMoveDistance = box.offsetWidth- slider.offsetWidth,//解锁需要滑动的距离
+		        downX,//用于存放鼠标按下时的位置
+		        isSuccess = false;//是否解锁成功的标志，默认不成功
+		    //给滑块添加鼠标按下事件
+		    slider.onmousedown = mousedownHandler;
+		
+		    //鼠标按下事件的方法实现
+		    function mousedownHandler(e){
+		        bgColor.style.transition = "";
+		        slider.style.transition = "";
+		        var e = e || window.event || e.which;
+		        downX = e.clientX;
+		        //在鼠标按下时，分别给鼠标添加移动和松开事件
+		        document.onmousemove = mousemoveHandler;
+		        document.onmouseup = mouseupHandler;
+		    };
+		
+		    //获取鼠标当前需要移动多少距离
+		    function getOffsetX(offset,min,max){
+		        if(offset < min){
+		            offset = min;
+		        }else if(offset > max){
+		            offset = max;
+		        }
+		        return offset;
+		    }
+		
+		    //鼠标移动事件的方法实现
+		    function mousemoveHandler(e){
+		        var e = e || window.event || e.which;
+		        var moveX = e.clientX;
+		        var offsetX = getOffsetX(moveX - downX,0,successMoveDistance);
+		        bgColor.style.width = offsetX + "px";
+		        slider.style.left = offsetX + "px";
+		
+		        if(offsetX == successMoveDistance){
+		            success();
+		        }
+
+		        e.preventDefault();
+		    };
+		
+		    //鼠标松开事件的方法实现
+		    function mouseupHandler(e){
+		        if(!isSuccess){
+		            bgColor.style.width = 0 + "px";
+		            slider.style.left = 0 + "px";
+		            bgColor.style.transition = "width 0.8s linear";
+		            slider.style.transition = "left 0.8s linear";
+		        }
+		        document.onmousemove = null;
+		        document.onmouseup = null;
+		    };
+		
+		    //滑块解锁成功的方法
+		    function success(){
+		        isSuccess = true;
+		        txt.innerHTML = "解锁成功";
+		        bgColor.style.backgroundColor ="lightgreen";
+		        slider.className = "slider active";
+		        icon.className = "iconfont icon-xuanzhong";
+				
+		     //滑动成功时，移除鼠标按下事件和鼠标移动事件
+		        slider.onmousedown = null;
+		        document.onmousemove = null;
+		    };
+			
+			
+			$("#sub").bind("click",function(){
+				if(isSuccess == true){
+					var xmlhttp;
+					if(window.XMLHttpRequest){
+						xmlhttp = new XMLHttpRequest();
+					}else{
+						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP")
+					}
+					xmlhttp.open("GET","http://127.0.0.1/htmlObj/getdata/getuser.php")
+					xmlhttp.send();
+					xmlhttp.onreadystatechange=function(){
+						if(xmlhttp.readyState == 4 &&xmlhttp.status ==200){
+							var data = JSON.parse(xmlhttp.responseText).data;
+							var userName = $("#userName").val();
+							var password = $("#password").val();
+							var dataUser = [];
+							for(var i of data){
+								dataUser.push(i.userName)
+							};
+							if(dataUser.includes(userName)){
+								alert("用户已存在")
+							}else{
+								
+								if(userName!=""&&password!=""){
+									$.ajax({
+										type:"POST",
+										url:"http://127.0.0.1/Reception/interface/setuser.php",
+										data:{userName:userName,password:password},
+										success:function(res){
+											alert("注册成功");
+										}
+									})
+								}else{
+									alert("不能为空")
+								}
+							}
+						}
+					}
+				}else{
+					alert("请验证后提交")
+				}
+			})
+			
+			
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>夕阳红超市-购物车</title>
+	<link rel="stylesheet" type="text/css" href="../css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+	<script src="../js/jquery-1.8.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div class="header_con">
+		<div class="header">
+			<div class="welcome fl">欢迎来到夕阳红!</div>
+			<div class="fr">
+				<div class="login_info fl">
+					<em id="uname">未登录</em>
+				</div>
+				<div class="login_btn fl">
+					<!-- <a href="login.html">登录</a> -->
+					<span>|</span>
+					<a href="register.html">注册</a>
+				</div>
+				<div class="user_link fl">
+					<span>|</span>
+					<a href="user_center_info.html">用户中心</a>
+					<span>|</span>
+					<a href="cart.html">我的购物车</a>
+					<span>|</span>
+					<!-- <a href="user_center_order.html">我的订单</a> -->
+				</div>
+			</div>
+		</div>		
+	</div>
+
+	<div class="search_bar clearfix">
+		<a href="../index.html" class="logo fl"><img src="../img/logo.png"></a>
+		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;购物车</div>
+		<div class="search_con fr">
+			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
+			<input type="button" class="input_btn fr" name="" value="搜索">
+		</div>		
+	</div>
+
+	<div class="total_count">全部商品<em>0</em>件</div>	
+	
+	<ul class="cart_list_th clearfix">
+		<li class="col01">商品名称</li>
+		<li class="col02">商品单位</li>
+		<li class="col03">商品价格</li>
+		<li class="col04">数量</li>
+		<li class="col05">小计</li>
+		<li class="col06">操作</li>
+	</ul>
+	<!-- td内容 -->
+	<div id="test">
+	<ul class="cart_list_td clearfix">
+		<li class="col01"><input type="checkbox" name="" class="allcheck"></li>
+		<li class="col02"><img src="" id="smallPic_src"></li>
+		<li class="col03" id="dataName">奇异果<br></li>
+		<li class="col04">份</li>
+		<li class="col05" id="dataPrice">25.80元</li>
+		<li class="col06">
+			<div class="num_add">
+				<a href="#" class="add fl">+</a>
+				<input type="text" class="numtotal fl" value="1" id="ipt_num">	
+				<a href="javascript:;" class="minus fl">-</a>	
+			</div>
+		</li>
+		<li class="col07" id="priceall">25.80元</li>
+		<li class="col08"><a href="javascript:;">删除</a></li>
+	</ul>
+	</div>
+	<!--结算部分 -->
+	<ul class="settlements">
+		<li class="col01"><input type="checkbox" name="" class="checkall"></li>
+		<li class="col02">
+			<button type="button" class="checkall">全选</button>
+			<a href="javascript:;" class="remove-batch">删除选中商品</a>
+			<a href="javascript:;" class="clear-all">清空购物车</a>
+		</li>
+		<li class="col03">合计(不含运费)：<span>¥</span><em class="price-sum">0.00</em><br>共计<b class="amount-sum">0</b>件商品</li>
+		<li class="col04"><a  id="sub">去结算</a></li>
+	</ul>
+
+	<div class="footer">
+		<div class="footer_ban">
+			<img src="../img/index/footer-1.png" width="80%" height="100px">
+		</div>
+		<div class="footer_ul">
+			<ul>
+				<li><a href="">购物指南</a></li>
+				<li><a href="">购物流程</a></li>
+				<li><a href="">会员介绍</a></li>
+				<li><a href="">生活旅行/团购</a></li>
+				<li><a href="">常见问题</a></li>
+				<li><a href="">联系客服</a></li>
+			</ul>
+			<ul>
+				<li><a href="">配送方式</a></li>
+				<li><a href="">上门自提</a></li>
+				<li><a href="">飞毛腿服务</a></li>
+				<li><a href="">配送服务查询</a></li>
+				<li><a href="">配送费收取标准</a></li>
+				<li><a href="">海外配送</a></li>
+			</ul>
+			<ul>
+				<li><a href="">支付方式</a></li>
+				<li><a href="">货到付款</a></li>
+				<li><a href="">在线支付</a></li>
+				<li><a href="">分期付款</a></li>
+				<li><a href="">公司转账</a></li>
+			</ul>
+			<ul>
+				<li><a href="">售后服务</a></li>
+				<li><a href="">售后政策</a></li>
+				<li><a href="">价格保护</a></li>
+				<li><a href="">退款说明</a></li>
+				<li><a href="">取消订单</a></li>
+				<li><a href="">返修/退换货</a></li>
+			</ul>
+			<ul>
+				<li><a href="">特色服务</a></li>
+				<li><a href="">延保服务</a></li>
+				<li><a href="">DIY服务</a></li>
+				<li><a href="">夕阳红活动</a></li>
+				<li><a href="">低价活动</a></li>
+			</ul>
+		</div>
+		<div class="foot_link">
+			<a href="#">关于我们</a>
+			<span>|</span>
+			<a href="#">联系我们</a>
+			<span>|</span>
+			<a href="#">合作招商</a>
+			<span>|</span>
+			<a href="#">夕阳红社区</a>	
+			<span>|</span>
+			<a href="#">隐私政策</a>	
+			<span>|</span>
+			<a href="#">商家帮助</a>	
+			<span>|</span>
+			<a href="#">风险监测</a>	
+		</div>
+		<p>CopyRight © 2020 成都夕阳红网上超市 All Rights Reserved</p>
+		<p>电话：010-****888    京ICP备*******8号</p>
+	</div>
+	
+	<script type="text/javascript" src="js/jquery-1.11.1/jquery.js"></script>
+<!-- 	<script type="text/javascript" src="js/jquery-1.8.3/jquery.js"></script> -->
+	<script>
+		
+		$(function(){
+			// 1.全选全不选功能
+			$(".checkall").change(function(){
+				$(".allcheck").prop("checked",$(this).prop("checked"));
+				if($(".allcheck").prop("checked")){
+					$(".cart_list_td").addClass("check-cart");
+				}else{
+					$(".cart_list_td").removeClass("check-cart");
+				}
+				getSum();
+			});
+			$(".allcheck").change(function(){
+				if($(".allcheck:checked").length === $(".allcheck").length){
+					$(".checkall").prop("checked",true);
+				}else{
+					$(".checkall").prop("checked",false);
+				}
+				
+				
+				if($(this).prop("checked")){
+					$(this).parents(".cart_list_td").addClass("check-cart");
+				}else{
+					$(this).parents(".cart_list_td").removeClass("check-cart");
+				}
+				getSum();
+			});
+			
+			
+			//2.更改商品数量+
+			$(".add").click(function(){
+				var n = $(this).siblings(".numtotal").val();
+				if(n == 999){
+					return false;
+				}
+				n++;
+				$(this).siblings(".numtotal").val(n);
+				
+				
+				//获取到单价---点击小计改变（+++）
+				var p = $(this).parent().parent().siblings(".col05").html();
+				p = p.substring(0,5);
+				var price = (p * n).toFixed(2);
+				//单价乘以总数
+				$(this).parent().parent().siblings(".col07").html(price +"元");
+				getSum();
+			});
+			
+			
+			//3.更改商品数量-
+			$(".minus").click(function(){
+				var n = $(this).siblings(".numtotal").val();
+				if(n == 1){
+					return false;
+				}
+				n--;
+				$(this).siblings(".numtotal").val(n);
+				
+				
+				//获取到单价---点击小计改变（---）
+				var p = $(this).parent().parent().siblings(".col05").html();
+				p = p.substring(0,5);
+				var price = (p * n).toFixed(2);
+				//单价乘以总数
+				$(this).parent().parent().siblings(".col07").html(price +"元");
+				getSum();
+			});
+			
+			//4.输入文本框改变小计价格
+			$(".numtotal").change(function(){
+				var n = $(this).val();
+				var p = $(this).parent().parent().siblings(".col05").html();
+				p = p.substring(0,5);
+				var price = (p * n).toFixed(2);
+				$(this).parent().parent().siblings(".col07").html(price +"元");
+				getSum();
+			});
+			
+			
+			//5.计算总件数和总价格
+			function getSum(){
+				var count = 0;
+				var money = 0;
+				
+				//计算总件数
+				$(".numtotal").each(function(i,ele){
+					count += parseInt($(ele).val());
+				});
+				$(".amount-sum").text(count);
+				$(".total_count em").text(count);
+				
+				//计算总价格
+				$(".col07").each(function(i,ele){
+					money += parseFloat($(ele).text().substring(0,5));
+				});
+				$(".price-sum").text(money.toFixed(2));
+			}
+			
+			//删除商品
+			$(".col08 a").click(function(){
+				$(this).parents(".cart_list_td").remove();
+			});
+			//删除指定商品
+			$(".remove-batch").click(function(){
+				$(".allcheck:checked").parents(".cart_list_td").remove();
+			});
+			//清空购物车
+			$(".clear-all").click(function(){
+				$(".cart_list_td").remove();
+			})
+		})
+		
+		
+		
+		
+	</script>
+
+	<script>
+		//获取缓存数据
+		$(function(){
+			var name = localStorage.getItem("name");
+			$("#uname").html("欢迎您："+name);
+			var obj = localStorage.getItem("obj");
+			var data = JSON.parse(obj);
+			$("#smallPic_src").attr("src", data.smallPic_src);
+			$("#dataName").html(data.dataName);
+			$("#dataPrice").html(data.dataPrice);
+			$("#ipt_num").val(data.ipt_num);
+			})
+			
+			
+			$("#sub").bind("click",function(){
+				var number = $("#ipt_num").val();
+				var price = $("#dataPrice").html();
+				var name = $("#dataName").html();
+				var priceall = $("#priceall").html();
+				console.log(priceall);
+				console.log(number);
+				console.log(name);
+				console.log(price);
+					$.ajax({
+						type:"POST",
+						url:"http://127.0.0.1/Reception/interface/setOrder.php",
+						data:{name:name,price:price,number:number,priceall:priceall},
+						success:function(res){
+							alert("提交成功");
+						}
+					})
+			})
+			/*
+			<ul class="cart_list_td clearfix">
+				<li class="col01"><input type="checkbox" name="" class="allcheck"></li>
+				<li class="col02"><img src="images/goods/goods012.jpg"></li>
+				<li class="col03">奇异果<br></li>
+				<li class="col04">份</li>
+				<li class="col05">25.80元</li>
+				<li class="col06">
+					<div class="num_add">
+						<a href="#" class="add fl">+</a>
+						<input type="text" class="numtotal fl" value="1">	
+						<a href="javascript:;" class="minus fl">-</a>	
+					</div>
+				</li>
+				<li class="col07">25.80元</li>
+				<li class="col08"><a href="javascript:;">删除</a></li>
+			</ul>
+			*/
+		// 	(function(){
+		// 			var data_box = document.getElementById("test");
+		// 			var ul=document.createElement("ul");
+		// 			data_box.appendChild(ul);
+		// 			for(let x=1;x<=9;x++){
+		// 				var li=document.createElement("li");
+		// 				ul.appendChild(li);
+		// 				li.className = "col0"+x;
+		// 			}
+		// 			var col_01 = document.getElementsByClassName("col01")[2];
+		// 			var input1=document.createElement("input");
+		// 			col_01.appendChild(input1);
+		// 			input1.className = "allcheck";
+		// 			var col_02 = document.getElementsByClassName("col02")[2];
+		// 			var img1=document.createElement("img");
+		// 			col_02.appendChild(img1);
+		// 			input1.src = "##";
+		// 			var col_03 = document.getElementsByClassName("col03")[2];
+		// 			col_03.innerHTML = data.dataName;
+		// 			var col_04 = document.getElementsByClassName("col04")[2];
+		// 			col_04.innerHTML = "份";
+		// 			var col_05 = document.getElementsByClassName("col05")[2];
+		// 			col_05.innerHTML = data.dataPrice+"元";
+		// 			var col_06 = document.getElementsByClassName("col06")[2];
+		// 			var div1 = document.createElement("div");
+		// 			div1.className = "num_add";
+		// 			col_06.appendChild(div1);
+		// 			var num_add = document.getElementsByClassName("num_add")[2];
+		// 			var a1 = document.createElement("a");
+		// 			var input2 = document.createElement("input");
+		// 			var a2 = document.createElement("a");
+		// 			num_add.appendChild(a1);
+		// 			var col_08 = document.getElementsByClassName("col08")[2];
+		// 			var a3 = document.createElement("a");
+		// 			col_08.appendChild(a3);
+		// 			a3.innerHTML="删除";
+		// 			// p1.innerText = data[i].name;
+		// 			// p2.innerText = "￥"+data[i].price;
+		// 			// var j = i+1;
+		// 			// img.src="../img/lingshi/"+j+".jpg";
+		// 			//<li class="col07">25.80元</li>
+		// 			//<li class="col08"><a href="javascript:;">删除</a></li>
+		// 	})()
+		// })
+	</script>
+</body>
+</html>

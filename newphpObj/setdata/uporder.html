@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			form{
+				width: 400px;
+				height: auto;
+				margin: 10px auto;
+			}
+			.field{
+				width: 400px;
+				height: 60px;
+				border: 1px solid #ccc;
+				margin-top: 20px;
+				border-radius: 10px;
+				overflow: hidden;
+			}
+			.field label{
+				display: inline-block;
+				width: 90px;
+				height: 60px;
+				line-height: 60px;
+				text-align: center;
+			}
+			.field input{
+				width: 304px;
+				height: 60px;
+				line-height: 60px;
+				display: inline-block;
+				border: 0;
+				outline: none;
+			}
+			.button{
+				display: inline-block;
+				width: 100px;
+				height: 45px;
+				line-height: 45px;
+				text-align: center;
+				border: 0;
+				border-radius: 10px;
+				background: #bfbfbf;
+				color: white;
+				margin-top: 10px;
+				cursor: pointer;
+				outline: none;
+			}
+		</style>
+	</head>
+	<body>
+		<form>
+			<div class="field">
+				<label for="name">name</label>
+				<input type="text" name="name" id="name" placeholder="请输入商品名字"/>
+			</div>
+			<div class="field">
+				<label for="price">price</label>
+				<input type="text" name="price" id="price" placeholder="请输入商品价格"/>
+			</div>
+			<div class="field">
+				<label for="number">numbers</label>
+				<input type="text" name="number" id="number" placeholder="请输入商品数量"/>
+			</div>
+			<div class="field">
+				<label for="priceall">总价</label>
+				<input type="text" name="priceall" id="priceall" placeholder="请输入商品总价"/>
+			</div>
+			<input type="reset" value="更新" class="button" id="updataBtn"/>
+			<input type="reset" value="重置" class="button"/>
+		</form>
+		
+		<script src="../js/jquery-1.11.1/jquery.js"></script>
+		
+
+ 		<script>
+			//获取url带过来的参数
+			function getUrlParam(name){
+				//构造一个含有目标参数的正则表达式对象
+				var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+				//匹配目标参数
+				var r = window.location.search.substr(1).match(reg);
+				if(r!=null){
+					return unescape(r[2]);
+				}else{
+					return null
+				}
+			}
+			var id = getUrlParam("id");
+			//console.log(id)
+			//根据ID获取对应的数值 并把数值赋值给表单
+			$.ajax({
+				type:"GET",
+				url:"http://192.168.6.222/newphpObj/updata/uporder.php?id="+id,
+				success:function(res){
+					var data = JSON.parse(res).data[0]
+					console.log(data)
+					$("#name").val(data.name);
+					$("#price").val(data.price);
+					$("#number").val(data.number);
+					$("#priceall").val(data.priceall);
+				}
+			});
+			
+			//点击提交按钮进行数据更新
+			$("#updataBtn").bind("click",function(){
+				var name = $("#name").val();
+				var price = $("#price").val();
+				var number = $("#number").val();
+				var priceall = $("#priceall").val();
+				if(name!=""&&price!=""&&number!=""&&priceall!=""){
+					$.ajax({
+						type:"POST",
+						url:"http://192.168.6.222/newphpObj/updata/suborder.php",
+						data:{name:name,price:price,number:number,priceall:priceall},
+						success:function(res){
+							console.log(res)
+							window.location.href = "http://192.168.6.222/newphpObj//html/order.html";
+						}
+					})
+				}else{
+					alert("不能为空")
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>生鲜水果</title>
+		<link rel="stylesheet" type="text/css" href="../css/snacks.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/main.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+		<script src="../js/jquery-1.11.1/jquery.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body >
+		
+		<div class="header_con">
+			<div class="header">
+				<div class="welcome fl">欢迎来到夕阳红!</div>
+				<div class="fr">
+					<div class="login_info fl">
+						<em id="uname">未登录</em>
+					</div>
+					<div class="login_btn fl">
+						<!-- <a href="login.html">登录</a> -->
+						<span>|</span>
+						<a href="register.html">注册</a>
+					</div>
+					<div class="user_link fl">
+						<span>|</span>
+						<a href="##">用户中心</a>
+						<span>|</span>
+						<a href="cart.html">我的购物车</a>
+						<span>|</span>
+						<!-- <a href="user_center_order.html">我的订单</a> -->
+					</div>
+				</div>
+			</div>		
+		</div>
+		
+		<div class="search_bar clearfix">
+			<a href="../index.html" class="logo fl"><img src="../img/logo.png"></a>
+			<div class="search_con fl">
+				<input type="text" class="input_text fl" name="" placeholder="搜索商品">
+				<input type="button" class="input_btn fr" name="" value="搜索">
+			</div>
+			<!-- <div class="guest_cart fr">
+				<a href="#" class="cart_name fl">我的购物车</a>
+				<div class="goods_count fl">1</div>
+			</div> -->
+		</div>
+		
+		
+		<div class="main">
+			<ul class="main_list" id="main_list"></ul>
+		</div>
+		
+		
+		<script>
+			// 把json 字符串转化为普通对象 JSON.parse()
+			// 把普通对象转化为json字符串 JSON.stringify()
+			var xmlhttp;
+			if(window.XMLHttpRequest){
+				xmlhttp = new XMLHttpRequest();
+			}else{
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP")
+			}
+			xmlhttp.open("GET","http://127.0.0.1/Reception/interface/getdata.php")
+			xmlhttp.send();
+			xmlhttp.onreadystatechange=function(){
+				if(xmlhttp.readyState == 4 &&xmlhttp.status ==200){
+					//转化json对象
+					var dataJson = JSON.parse(xmlhttp.responseText).data;
+					var data = [];
+					for(let i=0;i<dataJson.length;i++){
+						if(dataJson[i].group==5){
+							data.push(dataJson[i]);
+						}
+					}
+					console.log(data);
+					(function(){
+						for(var i=0;i<data.length;i++){
+							// console.log(data[i])
+							var data_box = document.getElementById("main_list");
+							var li=document.createElement("li");
+							data_box.appendChild(li);
+							var a=document.createElement("a");
+							li.appendChild(a);
+							var img=document.createElement("img");
+							a.appendChild(img);
+							var p1=document.createElement("p");
+							a.appendChild(p1);
+							var p2=document.createElement("p");
+							a.appendChild(p2);
+							a.href="datail5.html";
+							li.className = "lili";
+							p1.innerText = data[i].name;
+							p2.innerText = "￥"+data[i].price;
+							var j = i+1;
+							img.src="../img/shuiguo/"+j+".jpg";
+						}
+					})()
+					
+					window.onload=function(){
+						$(".lili").click(function(e){
+							var index = $(this).index();
+							console.log(index);
+							localStorage.setItem("index",index);
+						})
+					}
+				}
+			}
+			
+			
+			//获取localStorage
+			$(function() {
+				// var name = JSON.parse(localStorage.getItem("name"));
+				// console.log(name)
+				var name = localStorage.getItem("name");
+				$("#uname").html("欢迎您："+name);
+			})
+			
+			
+		</script>
+	</body>
+</html>
